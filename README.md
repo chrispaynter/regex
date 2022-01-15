@@ -121,6 +121,8 @@ public enum PerformanceEndDateType
 
 #### Find
 
+(You may need to add or remove some spaces)
+
 ```
 \[EnumMember\(Value = "([\w]+)"\)\]\n  ([\w]+)([,]{0,1})
 ```
@@ -180,3 +182,22 @@ $1[];
 freeShipmentModeIds: long[];
 ```
 
+## Change long int to number
+
+### Regex
+
+#### Find
+
+```
+: ([long|int]+);
+```
+
+#### Replace
+
+Note the use of `\L` to lower case the first letter of the property name
+
+```
+: number;
+```
+
+### 
