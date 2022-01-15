@@ -97,3 +97,86 @@ public class Advantage
 }
 ```
 
+
+
+## Change a C# enum to a typescript enum
+
+### Example C# enum
+
+```
+public enum PerformanceEndDateType
+{
+    [EnumMember(Value = "NONE")]
+    None,
+    [EnumMember(Value = "TIME_TOLERANCE")]
+    TimeTolerance,
+    [EnumMember(Value = "ABSOLUTE")]
+    Absolute,
+    [EnumMember(Value = "RELATIVE")]
+    Relative,
+}
+```
+
+### Regex
+
+#### Find
+
+```
+\[EnumMember\(Value = "([\w]+)"\)\]\n  ([\w]+)([,]{0,1})
+```
+
+#### Replace
+
+Note the use of `\L` to lower case the first letter of the property name
+
+```
+$2= "$1",
+```
+
+### Result
+
+Not perfect, but gets you 90% the way there.
+
+```
+public enum PerformanceEndDateType
+{
+  None= "NONE",
+  TimeTolerance= "TIME_TOLERANCE",
+  Absolute= "ABSOLUTE",
+  Relative= "RELATIVE",
+}
+
+```
+
+
+
+## Change an IEnumerable into an arry
+
+### Example property
+
+```
+freeShipmentModeIds: IEnumerable<long>;
+```
+
+### Regex
+
+#### Find
+
+```
+IEnumerable<([\w]+)>;
+```
+
+#### Replace
+
+Note the use of `\L` to lower case the first letter of the property name
+
+```
+$1[];
+```
+
+### Result
+
+```
+freeShipmentModeIds: long[];
+```
+
